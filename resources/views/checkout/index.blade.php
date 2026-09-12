@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Finalizar Compra — Checkout con Patrones GoF y SOLID')
+@section('title', 'Finalizar Compra — Artesanías del Valle')
 
 @section('content')
 <div class="max-w-5xl mx-auto space-y-8">
 
     <div class="border-b border-stone-200 pb-4">
         <span class="px-3 py-1 bg-clay-100 text-clay-800 text-xs font-bold rounded-full uppercase tracking-wider">
-            Arquitectura Limpia &middot; 5 Patrones GoF Activos
+            Compra Segura &middot; Envío Directo desde Talleres
         </span>
-        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-2">Checkout Interactivo de Artesanías</h1>
-        <p class="text-sm text-stone-500 mt-1">Configura decoradores estructurales, selecciona tu estrategia de pago y define el tipo de comprobante.</p>
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-2">Finalizar Compra de Artesanías</h1>
+        <p class="text-sm text-stone-500 mt-1">Completa los datos de envío, personaliza tu empaque y selecciona tu método de pago preferido.</p>
     </div>
 
     <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm" class="space-y-8">
@@ -48,23 +48,23 @@
                     </div>
                 </div>
 
-                <!-- 2. PATRÓN DECORATOR: Servicios de Valor Agregado -->
+                <!-- 2. Servicios de Valor Agregado -->
                 <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
                     <div class="flex items-center justify-between">
                         <h2 class="font-serif text-xl font-bold text-stone-900 flex items-center gap-2">
                             <span class="w-7 h-7 rounded-full bg-clay-600 text-white text-xs flex items-center justify-center font-sans font-bold">2</span>
-                            <span>Servicios Adicionales (Patrón Decorator)</span>
+                            <span>Servicios Adicionales para tu Envío</span>
                         </h2>
-                        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                            Composición Dinámica en Runtime
+                        <span class="text-[11px] font-bold text-stone-500 bg-stone-100 px-2.5 py-1 rounded-md border border-stone-200">
+                            Opciones de Entrega
                         </span>
                     </div>
                     <p class="text-xs text-stone-500">
-                        Cada servicio seleccionado envuelve el cálculo base implementando <code class="bg-stone-100 px-1 py-0.5 rounded text-stone-700 font-mono">OrderCostInterface</code> sin alterar la clase original ni recurrir a herencia estática ($2^N$ clases).
+                        Personaliza tu pedido con empaques tradicionales y protección especializada para tus piezas artesanales.
                     </p>
 
                     <div class="space-y-3 pt-2">
-                        <!-- Decorador 1: Empaque de mimbre -->
+                        <!-- Servicio 1: Empaque de mimbre -->
                         <label class="flex items-start gap-3 p-4 rounded-2xl border border-stone-200 hover:border-clay-300 cursor-pointer transition bg-stone-50/50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-500">
                             <input type="checkbox" name="gift_wrap" value="1" id="giftWrapCheck" class="mt-1 w-4 h-4 text-clay-600 rounded border-stone-300 focus:ring-clay-500" onchange="updateTotal()">
                             <div class="flex-1 text-xs">
@@ -72,11 +72,11 @@
                                     <span class="font-bold text-stone-900 text-sm">🧺 Empaque de Regalo Ecológico en Mimbre</span>
                                     <span class="font-mono font-bold text-clay-700 text-sm">+${{ number_format($giftWrapCost, 0, ',', '.') }} COP</span>
                                 </div>
-                                <p class="text-stone-500 mt-0.5">Canasto artesanal tejido a mano en fibra natural de plátano con lazo de fique biodegradable. <em>(GiftWrapDecorator)</em></p>
+                                <p class="text-stone-500 mt-0.5">Canasto artesanal tejido a mano en fibra natural de plátano con lazo de fique biodegradable ideal para obsequios especiales.</p>
                             </div>
                         </label>
 
-                        <!-- Decorador 2: Seguro de rotura -->
+                        <!-- Servicio 2: Seguro de rotura -->
                         <label class="flex items-start gap-3 p-4 rounded-2xl border border-stone-200 hover:border-clay-300 cursor-pointer transition bg-stone-50/50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-500">
                             <input type="checkbox" name="artisan_insurance" value="1" id="insuranceCheck" {{ $hasFragile ? 'checked' : '' }} class="mt-1 w-4 h-4 text-clay-600 rounded border-stone-300 focus:ring-clay-500" onchange="updateTotal()">
                             <div class="flex-1 text-xs">
@@ -84,73 +84,73 @@
                                     <span class="font-bold text-stone-900 text-sm">🛡️ Seguro contra Rotura de Piezas Frágiles</span>
                                     <span class="font-mono font-bold text-clay-700 text-sm">+${{ number_format($insuranceCost, 0, ',', '.') }} COP (5%)</span>
                                 </div>
-                                <p class="text-stone-500 mt-0.5">Reposición 100% garantizada ante accidentes en transporte terrestre para cerámicas y piezas delicadas. <em>(ArtisanInsuranceDecorator)</em></p>
+                                <p class="text-stone-500 mt-0.5">Reposición 100% garantizada ante accidentes o roturas durante el transporte para cerámicas, barro y piezas delicadas.</p>
                             </div>
                         </label>
                     </div>
                 </div>
 
-                <!-- 3. PATRÓN STRATEGY & ADAPTER: Métodos de Pago Desacoplados -->
+                <!-- 3. Métodos de Pago Seguros -->
                 <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
                     <div class="flex items-center justify-between">
                         <h2 class="font-serif text-xl font-bold text-stone-900 flex items-center gap-2">
                             <span class="w-7 h-7 rounded-full bg-clay-600 text-white text-xs flex items-center justify-center font-sans font-bold">3</span>
-                            <span>Estrategia de Pago (Patrón Strategy & Adapter)</span>
+                            <span>Selecciona tu Método de Pago</span>
                         </h2>
-                        <span class="text-[11px] font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200">
-                            Polimorfismo sin switch/case
+                        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                            Pago Seguro Cifrado
                         </span>
                     </div>
                     <p class="text-xs text-stone-500">
-                        Cada pasarela implementa <code class="bg-stone-100 px-1 py-0.5 rounded text-stone-700 font-mono">PaymentStrategyInterface</code>. El registro resuelve la estrategia en $O(1)$ sin condicionales de tipo. La opción bancaria tradicional utiliza además el patrón <strong>Adapter</strong>.
+                        Aceptamos los principales medios de pago en Colombia y pasarelas internacionales con acreditación instantánea.
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <!-- Strategy 1: Tarjeta -->
+                        <!-- Método 1: Tarjeta -->
                         <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition flex flex-col justify-between bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="payment_method" value="credit_card" checked class="text-clay-600 focus:ring-clay-500" onclick="togglePaymentFields('cc')">
-                                <span class="font-bold text-sm text-stone-900">Tarjeta de Crédito</span>
+                                <span class="font-bold text-sm text-stone-900">Tarjeta de Crédito / Débito</span>
                             </div>
-                            <span class="text-[11px] text-stone-500 mt-2">Visa, Mastercard, American Express. Tokenización segura.</span>
+                            <span class="text-[11px] text-stone-500 mt-2">Visa, Mastercard, American Express. Pagos protegidos.</span>
                         </label>
 
-                        <!-- Strategy 2: PSE -->
+                        <!-- Método 2: PSE -->
                         <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition flex flex-col justify-between bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="payment_method" value="pse" class="text-clay-600 focus:ring-clay-500" onclick="togglePaymentFields('pse')">
                                 <span class="font-bold text-sm text-stone-900">PSE Débito Bancario</span>
                             </div>
-                            <span class="text-[11px] text-stone-500 mt-2">Bancolombia, Nequi, Davivienda, Banco de Bogotá.</span>
+                            <span class="text-[11px] text-stone-500 mt-2">Bancolombia, Nequi, Davivienda, Daviplata y más.</span>
                         </label>
 
-                        <!-- Strategy 3: PayPal -->
+                        <!-- Método 3: PayPal -->
                         <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition flex flex-col justify-between bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="payment_method" value="paypal" class="text-clay-600 focus:ring-clay-500" onclick="togglePaymentFields('paypal')">
                                 <span class="font-bold text-sm text-stone-900">PayPal Internacional</span>
                             </div>
-                            <span class="text-[11px] text-stone-500 mt-2">Para compras internacionales desde EE.UU., Europa y el mundo.</span>
+                            <span class="text-[11px] text-stone-500 mt-2">Para compras internacionales desde cualquier país del mundo.</span>
                         </label>
 
-                        <!-- Strategy 4 + Adapter: Legacy Bank -->
-                        <label class="p-4 rounded-2xl border border-amber-200 cursor-pointer hover:border-clay-400 transition flex flex-col justify-between bg-amber-50/40 has-[:checked]:bg-amber-50 has-[:checked]:border-amber-600">
+                        <!-- Método 4: Transferencia Bancaria -->
+                        <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition flex flex-col justify-between bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="payment_method" value="legacy_bank" class="text-clay-600 focus:ring-clay-500" onclick="togglePaymentFields('legacy')">
-                                <span class="font-bold text-sm text-stone-900">Red Bancaria Tradicional</span>
+                                <span class="font-bold text-sm text-stone-900">Transferencia / Corresponsal</span>
                             </div>
-                            <span class="text-[11px] text-amber-800 font-medium mt-2">⚡ Integrada vía Patrón Adapter sobre SDK externo arcaico.</span>
+                            <span class="text-[11px] text-stone-500 mt-2">Pago a través de red bancaria tradicional y corresponsales.</span>
                         </label>
                     </div>
 
-                    <!-- Campos dinámicos simulados de pago -->
+                    <!-- Campos dinámicos de pago -->
                     <div id="paymentInputsContainer" class="p-4 rounded-2xl bg-stone-100 text-xs space-y-3">
                         <div id="ccFields">
-                            <label class="block font-semibold text-stone-700 mb-1">Número de Tarjeta Simulado</label>
+                            <label class="block font-semibold text-stone-700 mb-1">Número de Tarjeta</label>
                             <input type="text" name="card_number" value="4532 1100 2200 3300" class="w-full px-3 py-2 rounded-lg border border-stone-300 font-mono text-xs">
                         </div>
                         <div id="pseFields" class="hidden">
-                            <label class="block font-semibold text-stone-700 mb-1">Seleccione Entidad Bancaria (PSE)</label>
+                            <label class="block font-semibold text-stone-700 mb-1">Selecciona tu Entidad Bancaria (PSE)</label>
                             <select name="pse_bank" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs">
                                 <option value="Bancolombia">Bancolombia</option>
                                 <option value="Davivienda">Davivienda / Daviplata</option>
@@ -163,42 +163,42 @@
                             <input type="email" name="paypal_email" value="cliente@paypal.com" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs">
                         </div>
                         <div id="legacyFields" class="hidden text-stone-600">
-                            <p class="font-bold text-amber-900">Demostración Patrón Adapter:</p>
-                            <p>Se invocará el método arcaico <code class="font-mono text-stone-800">execute_transaction_v2()</code> de la clase incompatible <code class="font-mono text-stone-800">ExternalLegacyBankGateway</code> mediante la envoltura <code class="font-mono text-stone-800">LegacyBankAdapter</code>.</p>
+                            <p class="font-bold text-stone-800">Instrucciones de Pago Bancario:</p>
+                            <p class="mt-1">Al completar el pedido recibirás un código de referencia para pagar en cualquier corresponsal bancario o transferencia directa.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. PATRÓN FACTORY METHOD: Tipo de Comprobante -->
+                <!-- 4. Tipo de Comprobante -->
                 <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
                     <div class="flex items-center justify-between">
                         <h2 class="font-serif text-xl font-bold text-stone-900 flex items-center gap-2">
                             <span class="w-7 h-7 rounded-full bg-clay-600 text-white text-xs flex items-center justify-center font-sans font-bold">4</span>
-                            <span>Comprobante Contable (Patrón Factory Method)</span>
+                            <span>Tipo de Comprobante de Compra</span>
                         </h2>
-                        <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
-                            Creator Concreto sin switch
+                        <span class="text-[11px] font-bold text-stone-600 bg-stone-100 px-2.5 py-1 rounded-md border border-stone-200">
+                            Documento Oficial
                         </span>
                     </div>
                     <p class="text-xs text-stone-500">
-                        La creación de la factura se delega a <code class="bg-stone-100 px-1 py-0.5 rounded text-stone-700 font-mono">ReceiptFactory::createReceipt()</code> implementado por <code class="font-mono">ElectronicInvoiceFactory</code> o <code class="font-mono">SimpleTicketFactory</code>.
+                        Elige el tipo de documento comercial o tributario que deseas recibir con tu orden.
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                         <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="invoice_type" value="electronic" checked class="text-clay-600 focus:ring-clay-500">
-                                <span class="font-bold text-sm text-stone-900">Factura Electrónica DIAN</span>
+                                <span class="font-bold text-sm text-stone-900">Factura Electrónica</span>
                             </div>
-                            <p class="text-[11px] text-stone-500 mt-2">Genera CUFE (Código Único), firma digital, QR de validación fiscal y desglose formal de IVA. <em>(ElectronicInvoiceFactory)</em></p>
+                            <p class="text-[11px] text-stone-500 mt-2">Comprobante fiscal con código CUFE, validación tributaria y desglose detallado de impuestos.</p>
                         </label>
 
                         <label class="p-4 rounded-2xl border border-stone-200 cursor-pointer hover:border-clay-400 transition bg-stone-50 has-[:checked]:bg-clay-50 has-[:checked]:border-clay-600">
                             <div class="flex items-center gap-2">
                                 <input type="radio" name="invoice_type" value="ticket" class="text-clay-600 focus:ring-clay-500">
-                                <span class="font-bold text-sm text-stone-900">Tirilla POS Feria Artesanal</span>
+                                <span class="font-bold text-sm text-stone-900">Tirilla de Venta Directa</span>
                             </div>
-                            <p class="text-[11px] text-stone-500 mt-2">Ticket simplificado térmico de venta directa en taller campesino con agradecimiento al artesano. <em>(SimpleTicketFactory)</em></p>
+                            <p class="text-[11px] text-stone-500 mt-2">Comprobante simplificado de venta de taller artesanal con agradecimiento y certificado de autenticidad.</p>
                         </label>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
 
                 <div class="bg-stone-900 text-stone-100 p-6 sm:p-8 rounded-3xl shadow-xl sticky top-28 space-y-6">
                     <h3 class="font-serif font-bold text-xl text-amber-200 border-b border-stone-800 pb-3">
-                        Resumen de la Orden
+                        Resumen del Pedido
                     </h3>
 
                     <!-- Mini Lista de Ítems -->
@@ -230,16 +230,16 @@
                             <span class="font-mono text-stone-200 font-bold" id="lblSubtotal">${{ number_format($subtotal, 0, ',', '.') }} COP</span>
                         </div>
                         <div class="flex justify-between text-amber-300" id="rowGiftWrap" style="display: none;">
-                            <span>+ Empaque en Mimbre (Decorator):</span>
+                            <span>+ Empaque Especial en Mimbre:</span>
                             <span class="font-mono font-bold">+${{ number_format($giftWrapCost, 0, ',', '.') }} COP</span>
                         </div>
                         <div class="flex justify-between text-amber-300" id="rowInsurance" style="{{ $hasFragile ? '' : 'display: none;' }}">
-                            <span>+ Seguro Roturas (Decorator):</span>
+                            <span>+ Seguro contra Rotura:</span>
                             <span class="font-mono font-bold">+${{ number_format($insuranceCost, 0, ',', '.') }} COP</span>
                         </div>
                         <div class="flex justify-between text-emerald-400">
                             <span>Despacho Nacional:</span>
-                            <span class="font-bold">¡Cortesía Cultural!</span>
+                            <span class="font-bold">¡Envío Gratuito!</span>
                         </div>
 
                         <div class="border-t border-stone-700 pt-3 flex justify-between items-center text-base">
@@ -250,13 +250,13 @@
                         </div>
                     </div>
 
-                    <!-- Nota sobre Patrón Observer -->
+                    <!-- Garantías de Compra Segura -->
                     <div class="p-3.5 rounded-xl bg-stone-800/80 border border-stone-700 text-[11px] text-stone-300 space-y-1">
-                        <p class="font-bold text-emerald-400 flex items-center gap-1">
-                            <span>📡</span> Patrón Observer listo para dispararse:
+                        <p class="font-bold text-amber-300 flex items-center gap-1">
+                            <span>🛡️</span> Compra 100% Protegida y Garantizada
                         </p>
                         <p class="text-stone-400 leading-tight">
-                            Al confirmar, <code class="text-white">OrderSubject</code> notificará atómicamente a: <span class="text-amber-300">AuditLogObserver</span> (BD), <span class="text-amber-300">ArtisanNotificationObserver</span> (Alerta Taller) y <span class="text-amber-300">StockReductionObserver</span>.
+                            Tu compra respalda de manera directa a familias artesanas de Colombia. Embalaje protegido y despacho con seguimiento en línea.
                         </p>
                     </div>
 

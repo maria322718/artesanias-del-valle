@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Artesanías del Valle — Sabiduría Ancestral Colombiana')</title>
+    <title>@yield('title', 'Artesanías del Valle — Tienda Oficial de Artesanías Colombianas')</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,20 +74,20 @@
                     </div>
                     <div>
                         <span class="font-serif font-bold text-2xl tracking-tight text-stone-900 block leading-tight">Artesanías del Valle</span>
-                        <span class="text-[11px] text-stone-500 tracking-wider uppercase font-semibold">Tradición &middot; SOLID &middot; Patrones GoF</span>
+                        <span class="text-[11px] text-stone-500 tracking-wider uppercase font-semibold">Tradición &middot; Maestría Ancestral Colombiana</span>
                     </div>
                 </a>
 
-                <!-- Enlaces de Navegación -->
-                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <!-- Enlaces de Navegación Comerciales -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                     <a href="{{ route('catalog.index') }}" class="text-stone-700 hover:text-clay-600 transition-colors {{ request()->routeIs('catalog.*') ? 'text-clay-600 font-bold border-b-2 border-clay-600 pb-1' : '' }}">
                         Catálogo de Maestros
                     </a>
-                    <a href="{{ route('architecture.index') }}" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                        <span>Inspector Rúbrica 350 / GoF</span>
+                    <a href="{{ route('catalog.index') }}#regiones" class="text-stone-600 hover:text-clay-600 transition-colors">
+                        Regiones y Tradición
+                    </a>
+                    <a href="{{ route('catalog.index') }}#garantias" class="text-stone-600 hover:text-clay-600 transition-colors">
+                        Comercio Justo
                     </a>
                 </nav>
 
@@ -145,31 +145,35 @@
         @yield('content')
     </main>
 
-    <!-- Footer Cultural y Técnico -->
+    <!-- Footer E-commerce Comercial -->
     <footer class="bg-stone-900 text-stone-300 border-t border-stone-800 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Columna 1: Filosofía -->
+                <!-- Columna 1: Misión de la Tienda -->
                 <div class="md:col-span-2">
-                    <div class="flex items-center space-x-2 text-white font-serif font-bold text-xl mb-3">
+                    <div class="flex items-center space-x-2 text-white font-serif font-bold text-2xl mb-3">
                         <span>Artesanías del Valle</span>
                     </div>
                     <p class="text-sm text-stone-400 leading-relaxed max-w-md">
-                        Plataforma de comercio electrónico diseñada para salvaguardar y visibilizar las técnicas ancestrales de los maestros artesanos colombianos, construida sobre una arquitectura de software limpia aplicando los 5 principios SOLID y 5 patrones GoF canónicos.
+                        Tienda oficial dedicada a preservar, difundir y comercializar piezas maestras elaboradas 100% a mano por artesanos tradicionales de Colombia. Apoyamos el comercio justo y el sustento de cientos de familias en sus territorios de origen.
                     </p>
-                    <div class="mt-4 flex flex-wrap gap-2 text-xs">
-                        <span class="px-2.5 py-1 rounded bg-stone-800 text-clay-400 font-semibold border border-stone-700">Strategy</span>
-                        <span class="px-2.5 py-1 rounded bg-stone-800 text-clay-400 font-semibold border border-stone-700">Factory Method</span>
-                        <span class="px-2.5 py-1 rounded bg-stone-800 text-clay-400 font-semibold border border-stone-700">Observer</span>
-                        <span class="px-2.5 py-1 rounded bg-stone-800 text-clay-400 font-semibold border border-stone-700">Decorator</span>
-                        <span class="px-2.5 py-1 rounded bg-stone-800 text-clay-400 font-semibold border border-stone-700">Adapter</span>
+                    <div class="mt-5 flex items-center gap-3 text-stone-400 text-xs">
+                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
+                            <span>🌿</span> 100% Hecho a Mano
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
+                            <span>🤝</span> Comercio Justo
+                        </span>
+                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
+                            <span>📦</span> Envíos Seguros
+                        </span>
                     </div>
                 </div>
 
-                <!-- Columna 2: Regiones Artesanales -->
+                <!-- Columna 2: Regiones y Maestría -->
                 <div>
-                    <h4 class="text-xs font-bold tracking-wider text-amber-400 uppercase mb-3">Regiones & Saberes</h4>
-                    <ul class="space-y-1.5 text-xs text-stone-400">
+                    <h4 class="text-xs font-bold tracking-wider text-amber-400 uppercase mb-4">Regiones & Saberes</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
                         <li>🌾 Tuchín, Córdoba — Caña Flecha</li>
                         <li>🧶 La Guajira — Tejido Wayuu</li>
                         <li>🏺 Ráquira, Boyacá — Alfarería Negra</li>
@@ -179,22 +183,22 @@
                     </ul>
                 </div>
 
-                <!-- Columna 3: Arquitectura & Rúbrica -->
+                <!-- Columna 3: Atención y Confianza -->
                 <div>
-                    <h4 class="text-xs font-bold tracking-wider text-emerald-400 uppercase mb-3">Proyecto Integrador</h4>
-                    <ul class="space-y-1.5 text-xs text-stone-400">
-                        <li><a href="{{ route('architecture.index') }}" class="hover:text-white transition">Rúbrica de Evaluación (350/350)</a></li>
-                        <li><span class="text-stone-500">legacy/LegacyCheckoutController.php</span></li>
-                        <li><span class="text-stone-500">docs/sustentacion/01_diagnostico.md</span></li>
-                        <li><span class="text-stone-500">tests/Unit/ (5 Tests GoF + LSP)</span></li>
-                        <li><span class="text-emerald-500 font-bold">Docker Compose (Sail) + PostgreSQL</span></li>
+                    <h4 class="text-xs font-bold tracking-wider text-amber-400 uppercase mb-4">Atención & Compras</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li>🛡️ Embalaje protector para piezas frágiles</li>
+                        <li>💳 Pagos seguros con PSE, Tarjetas y Bancos</li>
+                        <li>🚚 Cobertura de envíos a toda Colombia</li>
+                        <li>📄 Facturación electrónica y comprobante</li>
+                        <li>💬 Soporte directo a artesanos y clientes</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="mt-8 pt-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500">
-                <p>&copy; {{ date('Y') }} Artesanías del Valle. Proyecto de Especialización en Arquitectura de Software.</p>
-                <p class="mt-2 sm:mt-0 font-mono text-[11px]">PHP 8.2+ &middot; Laravel 11 &middot; PostgreSQL 15 &middot; Docker</p>
+            <div class="mt-10 pt-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500">
+                <p>&copy; {{ date('Y') }} Artesanías del Valle. Tienda Oficial de Artesanías de Colombia. Todos los derechos reservados.</p>
+                <p class="mt-2 sm:mt-0 text-stone-400 font-medium">Comercio Justo y Patrimonio Cultural Inmaterial de Colombia</p>
             </div>
         </div>
     </footer>

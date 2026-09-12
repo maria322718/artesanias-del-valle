@@ -3,9 +3,9 @@
 @section('title', 'Catálogo de Artesanías de Colombia — Artesanías del Valle')
 
 @section('content')
-<div class="space-y-10">
+<div class="space-y-12">
 
-    <!-- Hero Banner Cultural -->
+    <!-- Hero Banner Comercial y Cultural -->
     <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-clay-900 via-clay-800 to-clay-700 text-white shadow-xl">
         <div class="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="relative max-w-3xl px-8 py-14 sm:px-12 sm:py-20">
@@ -18,20 +18,20 @@
             <p class="mt-4 text-base sm:text-lg text-clay-100 leading-relaxed">
                 Descubre obras maestras elaboradas por comunidades Wayuu, Zenú, alfareros de Ráquira y barnizadores de Pasto. Cada compra apoya directamente a los talleres familiares de las regiones.
             </p>
-            <div class="mt-6 flex flex-wrap gap-4 items-center">
-                <a href="#catalogo" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm shadow-md hover:shadow-lg transition">
+            <div class="mt-8 flex flex-wrap gap-4 items-center">
+                <a href="#catalogo" class="px-7 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm shadow-md hover:shadow-lg transition">
                     Explorar Catálogo
                 </a>
-                <a href="{{ route('architecture.index') }}" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur border border-white/20 transition flex items-center gap-2">
-                    <span>Ver Arquitectura GoF & SOLID</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <a href="#garantias" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur border border-white/20 transition flex items-center gap-2">
+                    <span>Nuestras Garantías de Compra</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Barra de Filtros y Búsqueda -->
-    <div id="catalogo" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col md:flex-row gap-4 items-center justify-between">
+    <div id="catalogo" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col md:flex-row gap-4 items-center justify-between scroll-mt-24">
         <!-- Buscador -->
         <form action="{{ route('catalog.index') }}" method="GET" class="w-full md:w-1/2 flex items-center gap-2">
             <div class="relative w-full">
@@ -47,11 +47,11 @@
 
         <!-- Filtro por Región -->
         <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-            <a href="{{ route('catalog.index') }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap {{ !request('region') ? 'bg-clay-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}">
+            <a href="{{ route('catalog.index') }}#catalogo" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap {{ !request('region') ? 'bg-clay-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}">
                 Todas las Regiones
             </a>
             @foreach($regions as $reg)
-                <a href="{{ route('catalog.index', ['region' => $reg]) }}" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap {{ request('region') === $reg ? 'bg-clay-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}">
+                <a href="{{ route('catalog.index', ['region' => $reg]) }}#catalogo" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap {{ request('region') === $reg ? 'bg-clay-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}">
                     {{ $reg }}
                 </a>
             @endforeach
@@ -72,14 +72,14 @@
                         </span>
                         @if($product->is_fragile)
                             <span class="px-2.5 py-1 bg-amber-500 text-stone-950 text-[11px] font-bold rounded-lg shadow-sm flex items-center gap-1">
-                                <span>⚠️</span> Pieza Frágil (Aplica Seguro)
+                                <span>🛡️</span> Pieza Delicada
                             </span>
                         @endif
                     </div>
 
                     <div class="absolute bottom-3 right-3">
                         <span class="px-2.5 py-1 bg-white/90 backdrop-blur text-stone-700 text-[11px] font-semibold rounded-md shadow">
-                            Stock: {{ $product->stock }} uds.
+                            Stock: {{ $product->stock }} disponibles
                         </span>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                             {{ $product->name }}
                         </h3>
                         <p class="mt-2 text-xs text-stone-500 flex items-center gap-1">
-                            <span class="font-semibold text-stone-700">Artesano:</span> {{ $product->artisan_name }}
+                            <span class="font-semibold text-stone-700">Maestro Artesano:</span> {{ $product->artisan_name }}
                         </p>
                         <p class="mt-3 text-sm text-stone-600 line-clamp-3 leading-relaxed">
                             {{ $product->description }}
@@ -114,7 +114,7 @@
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="px-4 py-2.5 rounded-xl bg-clay-600 hover:bg-clay-700 text-white text-xs font-bold shadow hover:shadow-md transition flex items-center gap-1.5">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                                <span>Agregar</span>
+                                <span>Agregar al Carrito</span>
                             </button>
                         </form>
                     </div>
@@ -126,6 +126,37 @@
                 <a href="{{ route('catalog.index') }}" class="mt-3 inline-block text-clay-600 font-bold text-sm underline">Restablecer filtros</a>
             </div>
         @endforelse
+    </div>
+
+    <!-- Sección de Garantías y Comercio Justo -->
+    <div id="garantias" class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 scroll-mt-24">
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-clay-100 text-clay-700 flex items-center justify-center font-bold text-lg">
+                🤝
+            </div>
+            <h4 class="font-serif font-bold text-base text-stone-900">Comercio Justo y Directo</h4>
+            <p class="text-xs text-stone-500 leading-relaxed">
+                Sin intermediarios abusivos. El 100% del valor pactado llega a las manos de los artesanos y sus asociaciones comunitarias en cada región.
+            </p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+                🛡️
+            </div>
+            <h4 class="font-serif font-bold text-base text-stone-900">Protección en el Envío</h4>
+            <p class="text-xs text-stone-500 leading-relaxed">
+                Embalaje acolchado de grado exportación y opción de seguro de rotura para cerámicas, barro y piezas frágiles durante el transporte nacional.
+            </p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                ✨
+            </div>
+            <h4 class="font-serif font-bold text-base text-stone-900">Certificado de Autenticidad</h4>
+            <p class="text-xs text-stone-500 leading-relaxed">
+                Cada pieza incluye su comprobante y reseña con el nombre del maestro artesano, la técnica ancestral y la denominación de origen cultural.
+            </p>
+        </div>
     </div>
 
 </div>

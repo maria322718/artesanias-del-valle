@@ -8,7 +8,7 @@
     <div class="border-b border-stone-200 pb-4 flex items-center justify-between">
         <div>
             <h1 class="font-serif text-3xl font-bold text-stone-900">Carrito de Artesanías</h1>
-            <p class="text-sm text-stone-500 mt-1">Revisa tus piezas tradicionales antes de pasar al proceso de checkout.</p>
+            <p class="text-sm text-stone-500 mt-1">Revisa tus piezas tradicionales antes de pasar al proceso de pago.</p>
         </div>
         <a href="{{ route('catalog.index') }}" class="text-xs font-bold text-clay-600 hover:text-clay-700 flex items-center gap-1">
             <span>&larr; Seguir explorando</span>
@@ -32,8 +32,8 @@
             <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-3 shadow-sm">
                 <span class="text-lg">🛡️</span>
                 <div>
-                    <span class="font-bold">Tu carrito contiene piezas frágiles de alfarería o barniz.</span>
-                    <p class="mt-0.5 text-stone-600">En el checkout podrás activar el decorador de software <strong>Seguro contra Rotura de Piezas Frágiles</strong> (Patrón Decorator) para garantizar su reposición en caso de daños durante el transporte.</p>
+                    <span class="font-bold">Tu carrito contiene piezas delicadas de cerámica o alfarería.</span>
+                    <p class="mt-0.5 text-stone-600">En el siguiente paso podrás incluir embalaje reforzado y <strong>Seguro contra Rotura</strong> para garantizar su reposición en caso de cualquier incidente durante el transporte.</p>
                 </div>
             </div>
         @endif
@@ -48,12 +48,12 @@
                         <div class="flex items-center justify-center sm:justify-start gap-2">
                             <span class="text-[11px] font-bold text-clay-600 uppercase">{{ $item['origin_region'] ?? 'Colombia' }}</span>
                             @if(!empty($item['is_fragile']))
-                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Frágil</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Pieza Delicada</span>
                             @endif
                         </div>
                         <h3 class="font-serif font-bold text-lg text-stone-900 mt-1">{{ $item['name'] }}</h3>
-                        <p class="text-xs text-stone-500">Artesano: {{ $item['artisan_name'] ?? 'Maestro de la Región' }}</p>
-                        <p class="text-xs font-semibold text-stone-700 mt-1">Precio Unitario: ${{ number_format((float) $item['price'], 0, ',', '.') }} COP</p>
+                        <p class="text-xs text-stone-500">Maestro Artesano: {{ $item['artisan_name'] ?? 'Maestro de la Región' }}</p>
+                        <p class="text-xs font-semibold text-stone-700 mt-1">Precio: ${{ number_format((float) $item['price'], 0, ',', '.') }} COP</p>
                     </div>
 
                     <!-- Cantidad y Subtotal -->
@@ -85,7 +85,7 @@
             <div>
                 <span class="text-xs text-stone-500 uppercase font-bold tracking-wider">Subtotal Productos</span>
                 <p class="text-3xl font-serif font-bold text-stone-900">${{ number_format($subtotal, 0, ',', '.') }} <span class="text-sm font-sans font-normal text-stone-500">COP</span></p>
-                <p class="text-xs text-stone-500 mt-1">Los costos de servicios artesanales y medios de pago se eligen en el paso siguiente.</p>
+                <p class="text-xs text-stone-500 mt-1">Los servicios adicionales de empaque y medios de pago se seleccionan en el checkout.</p>
             </div>
 
             <div class="flex items-center gap-4 w-full sm:w-auto">
@@ -96,7 +96,7 @@
                     </button>
                 </form>
                 <a href="{{ route('checkout.index') }}" class="flex-1 sm:flex-initial px-8 py-3.5 rounded-xl bg-clay-600 hover:bg-clay-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition text-center flex items-center justify-center gap-2">
-                    <span>Continuar al Checkout</span>
+                    <span>Continuar al Pago</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
             </div>
