@@ -101,6 +101,7 @@ class CheckoutController extends Controller
         $request->session()->put('last_checkout_result', [
             'order_id' => $responseDTO->order?->id,
             'order_number' => $responseDTO->order?->order_number,
+            'order_nit' => $responseDTO->order?->nit,
             'customer_name' => $customerData['name'],
             'customer_email' => $customerData['email'],
             'total_amount' => $responseDTO->order?->total_amount,

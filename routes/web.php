@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\ArchitectureReviewController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderTrackingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,11 +25,11 @@ Route::post('/carrito/actualizar', [CartController::class, 'update'])->name('car
 Route::post('/carrito/eliminar/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/carrito/vaciar', [CartController::class, 'clear'])->name('cart.clear');
 
-// Checkout & Procesamiento GoF
+// Checkout & Procesamiento de Órdenes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/procesar', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/confirmacion/{order}', [CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
 
-// Panel de Arquitectura de Software, SOLID y Rúbrica 350
-Route::get('/arquitectura-solid-gof', [ArchitectureReviewController::class, 'index'])->name('architecture.index');
-Route::get('/api/pattern-demo', [ArchitectureReviewController::class, 'runPatternDemo'])->name('api.pattern_demo');
+// Consulta y Trazabilidad de Pedidos por NIT
+Route::get('/consultar-pedido', [OrderTrackingController::class, 'index'])->name('orders.tracking');
+Route::post('/consultar-pedido', [OrderTrackingController::class, 'search'])->name('orders.track');

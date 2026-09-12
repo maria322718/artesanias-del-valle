@@ -1,141 +1,227 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-stone-50 text-stone-800">
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Artesanías del Valle — Tienda Oficial de Artesanías Colombianas')</title>
-    <!-- Google Fonts -->
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN con Configuración Personalizada -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
                     },
                     colors: {
-                        clay: {
-                            50: '#FAF5F2',
-                            100: '#F5EAE4',
-                            200: '#EBD4C9',
-                            500: '#C85A32',
-                            600: '#B34726',
-                            700: '#91351A',
-                            800: '#752A15',
-                            900: '#5F2212',
+                        terracota: {
+                            DEFAULT: '#8D341B',
+                            dark: '#6C230E',
+                            light: '#A34328',
+                            50: '#FDF7F4',
+                            100: '#F8EBE4',
+                            200: '#EFCFBF',
+                            600: '#8D341B',
+                            700: '#6C230E',
                         },
-                        emerald: {
-                            850: '#03542B',
-                            950: '#012915',
+                        ocre: {
+                            DEFAULT: '#D9822B',
+                            hover: '#C27120',
+                            light: '#F8E9D8',
+                            gold: '#F59E0B',
                         },
-                        sand: {
-                            50: '#FDFCFA',
-                            100: '#F9F6F0',
-                            200: '#F1ECE0',
-                            300: '#E3DAC9',
+                        craft: {
+                            bg: '#F8F4EE',
+                            warm: '#F3ECE1',
+                            card: '#FFFFFF',
+                            text: '#231F1D',
+                            muted: '#6E6864',
+                            border: '#E5DDD2',
                         }
+                    },
+                    borderRadius: {
+                        'craft': '16px',
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        .artisan-pattern {
-            background-color: #fbf9f5;
-            background-image: radial-gradient(#c85a32 0.75px, transparent 0.75px), radial-gradient(#046a38 0.75px, #fbf9f5 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            background-opacity: 0.05;
+        :root {
+            --terracota: #8D341B;
+            --terracota-dark: #6C230E;
+            --terracota-light: #A34328;
+            --ocre: #D9822B;
+            --ocre-light: #F59E0B;
+            --bg: #F8F4EE;
+            --bg-warm: #F2E9DE;
+            --card-bg: #FFFFFF;
+            --text: #231F1D;
+            --muted: #6E6864;
+            --border: #E5DDD2;
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            background-image: 
+                radial-gradient(at 15% 15%, rgba(217, 130, 43, 0.07) 0px, transparent 45%),
+                radial-gradient(at 85% 85%, rgba(141, 52, 27, 0.08) 0px, transparent 45%),
+                radial-gradient(at 50% 40%, rgba(108, 35, 14, 0.04) 0px, transparent 55%);
+            background-attachment: fixed;
+        }
+
+        .font-editorial {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .border-craft {
+            border-color: var(--border);
+        }
+
+        /* Sistema de Tarjetas Artesanales con Sombreado Dinámico y Selección */
+        .artisan-card {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
+            border: 1.5px solid #E6DED2;
+            border-radius: var(--radius);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 4px 10px -2px rgba(108, 35, 14, 0.06), 0 2px 4px -2px rgba(108, 35, 14, 0.04);
+        }
+
+        /* Sombreado Elevado al Pasar el Cursor (Hover) */
+        .artisan-card:hover {
+            transform: translateY(-6px);
+            border-color: #D9822B;
+            box-shadow: 0 22px 30px -8px rgba(141, 52, 27, 0.22), 0 8px 16px -4px rgba(217, 130, 43, 0.16);
+        }
+
+        /* Sombreado Destacado y Aura Cálida al Seleccionar (Click / Focus) */
+        .artisan-card.is-selected {
+            transform: translateY(-8px) scale(1.012);
+            border-color: #8D341B !important;
+            box-shadow: 
+                0 0 0 3px rgba(141, 52, 27, 0.35),
+                0 28px 40px -10px rgba(108, 35, 14, 0.32),
+                0 14px 22px -6px rgba(217, 130, 43, 0.24) !important;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%) !important;
+        }
+
+        .artisan-card:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px #D9822B, 0 20px 25px -5px rgba(141, 52, 27, 0.2);
+        }
+
+        .artisan-card.is-selected .selected-pill {
+            opacity: 1 !important;
+            transform: scale(1) !important;
         }
     </style>
 </head>
-<body class="min-h-full flex flex-col font-sans selection:bg-clay-500 selection:text-white artisan-pattern">
+<body class="min-h-full flex flex-col font-sans selection:bg-terracota selection:text-white">
 
-    <!-- Barra de Anuncio Cultural -->
-    <div class="bg-clay-700 text-amber-100 text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center space-x-2">
-        <span>✨ Comercio Justo Directo con Comunidades Artesanales de Colombia: La Guajira, Boyacá, Córdoba, Huila, Nariño y Bolívar</span>
+    <!-- Barra de Anuncio Oficial con Gradiente Cálido y Tipografía Dorada -->
+    <div class="bg-gradient-to-r from-[#5B1C0A] via-[#6C230E] to-[#7D2911] text-[#FDEBD9] text-xs py-2 px-4 text-center font-semibold tracking-wide border-b border-[#8D341B]/40 shadow-sm flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse inline-block"></span>
+        <span>Comercio Justo Directo con Comunidades Artesanales de Colombia &bull; La Guajira, Boyacá, Córdoba, Huila, Nariño y Bolívar</span>
     </div>
 
-    <!-- Navegación Principal -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+    <!-- Navegación Principal con Borde de Acento Cálido -->
+    <header class="sticky top-0 z-50 bg-[#FFFCF9]/95 backdrop-blur border-b border-[#E5DDD2] shadow-[0_2px_12px_rgba(108,35,14,0.04)]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logotipo -->
-                <a href="{{ route('catalog.index') }}" class="flex items-center space-x-3 group">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-clay-700 to-clay-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <div class="flex items-center justify-between h-[75px]">
+                
+                <!-- Logotipo Artesanal Nuevo -->
+                <a href="{{ route('catalog.index') }}" class="flex items-center space-x-3.5 group">
+                    <div class="w-11 h-11 rounded-xl bg-[#8D341B] flex items-center justify-center text-white shadow-sm group-hover:bg-[#6C230E] transition-colors p-2">
+                        <!-- Emblema de Vasija de Barro Ancestral y Sol -->
+                        <svg class="w-full h-full text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 10h20M18 10c0 4-4 8-4 14 0 7 4 12 10 12s10-5 10-12c0-6-4-10-4-14" />
+                            <ellipse cx="24" cy="10" rx="10" ry="3" />
+                            <path d="M12 20c-3 0-5 2-5 5 0 3 2 5 5 5" />
+                            <path d="M36 20c3 0 5 2 5 5 0 3-2 5-5 5" />
+                            <circle cx="24" cy="24" r="3" fill="currentColor" />
+                            <path d="M19 32c1.5 1.5 3.2 2.5 5 2.5s3.5-1 5-2.5" />
                         </svg>
                     </div>
                     <div>
-                        <span class="font-serif font-bold text-2xl tracking-tight text-stone-900 block leading-tight">Artesanías del Valle</span>
-                        <span class="text-[11px] text-stone-500 tracking-wider uppercase font-semibold">Tradición &middot; Maestría Ancestral Colombiana</span>
+                        <span class="font-serif font-bold text-xl sm:text-2xl text-[#8D341B] block leading-tight tracking-tight">
+                            Artesanías del Valle
+                        </span>
+                        <span class="text-[10px] text-[#6E6864] tracking-widest uppercase font-semibold block">
+                            Tradición &bull; Maestría Ancestral
+                        </span>
                     </div>
                 </a>
 
-                <!-- Enlaces de Navegación Comerciales -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="{{ route('catalog.index') }}" class="text-stone-700 hover:text-clay-600 transition-colors {{ request()->routeIs('catalog.*') ? 'text-clay-600 font-bold border-b-2 border-clay-600 pb-1' : '' }}">
+                <!-- Menú de Navegación -->
+                <nav class="hidden md:flex items-center space-x-7 text-sm font-medium">
+                    <a href="{{ route('catalog.index') }}" class="transition-colors {{ request()->routeIs('catalog.*') ? 'text-[#8D341B] font-bold' : 'text-[#231F1D] hover:text-[#8D341B]' }}">
                         Catálogo de Maestros
                     </a>
-                    <a href="{{ route('catalog.index') }}#regiones" class="text-stone-600 hover:text-clay-600 transition-colors">
+                    <a href="{{ route('catalog.index') }}#regiones" class="text-[#231F1D] hover:text-[#8D341B] transition-colors">
                         Regiones y Tradición
                     </a>
-                    <a href="{{ route('catalog.index') }}#garantias" class="text-stone-600 hover:text-clay-600 transition-colors">
+                    <a href="{{ route('catalog.index') }}#garantias" class="text-[#231F1D] hover:text-[#8D341B] transition-colors">
                         Comercio Justo
+                    </a>
+                    <a href="{{ route('orders.tracking') }}" class="transition-colors {{ request()->routeIs('orders.*') ? 'text-[#8D341B] font-bold' : 'text-[#231F1D] hover:text-[#8D341B]' }} flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FAF2EA] border border-[#E8DFD3] hover:border-[#8D341B] text-xs">
+                        <svg class="w-3.5 h-3.5 text-[#8D341B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <span>Consultar Pedido</span>
                     </a>
                 </nav>
 
-                <!-- Carrito y Acciones -->
+                <!-- Botón de Carrito (Estilo Cápsula) -->
                 <div class="flex items-center space-x-4">
                     @php
                         $cartCount = count(session('cart', []));
                     @endphp
-                    <a href="{{ route('cart.index') }}" class="relative p-2.5 rounded-xl bg-stone-100 hover:bg-clay-50 text-stone-700 hover:text-clay-600 transition flex items-center space-x-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <a href="{{ route('cart.index') }}" class="px-4 py-2 rounded-full border border-[#E8E2D9] bg-white text-[#231F1D] hover:bg-[#FBF9F5] transition flex items-center gap-2.5 text-xs font-semibold shadow-sm">
+                        <svg class="w-4 h-4 text-[#8D341B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
-                        @if($cartCount > 0)
-                            <span class="absolute -top-1 -right-1 w-5 h-5 bg-clay-600 text-white rounded-full text-xs font-bold flex items-center justify-center shadow">
-                                {{ $cartCount }}
-                            </span>
-                        @endif
-                        <span class="hidden sm:inline text-xs font-semibold">Mi Carrito</span>
+                        <span>Mi Carrito ({{ $cartCount }})</span>
                     </a>
                 </div>
+
             </div>
         </div>
     </header>
 
     <!-- Alertas Flash -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5 w-full">
         @if(session('success'))
-            <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center space-x-3 shadow-sm">
-                <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            <div class="p-4 rounded-[14px] bg-white border border-emerald-300 text-emerald-900 text-xs font-medium flex items-center space-x-3 shadow-sm">
+                <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <div class="font-medium">{{ session('success') }}</div>
+                <div>{{ session('success') }}</div>
             </div>
         @endif
         @if(session('error'))
-            <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm flex items-center space-x-3 shadow-sm">
-                <svg class="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            <div class="p-4 rounded-[14px] bg-white border border-red-300 text-red-900 text-xs font-medium flex items-center space-x-3 shadow-sm">
+                <svg class="w-5 h-5 text-red-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-                <div class="font-medium">{{ session('error') }}</div>
+                <div>{{ session('error') }}</div>
             </div>
         @endif
         @if(session('info'))
-            <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm flex items-center space-x-3 shadow-sm">
-                <svg class="w-5 h-5 text-amber-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            <div class="p-4 rounded-[14px] bg-white border border-amber-300 text-amber-900 text-xs font-medium flex items-center space-x-3 shadow-sm">
+                <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <div class="font-medium">{{ session('info') }}</div>
+                <div>{{ session('info') }}</div>
             </div>
         @endif
     </div>
@@ -145,60 +231,62 @@
         @yield('content')
     </main>
 
-    <!-- Footer E-commerce Comercial -->
-    <footer class="bg-stone-900 text-stone-300 border-t border-stone-800 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Columna 1: Misión de la Tienda -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-2 text-white font-serif font-bold text-2xl mb-3">
-                        <span>Artesanías del Valle</span>
-                    </div>
-                    <p class="text-sm text-stone-400 leading-relaxed max-w-md">
-                        Tienda oficial dedicada a preservar, difundir y comercializar piezas maestras elaboradas 100% a mano por artesanos tradicionales de Colombia. Apoyamos el comercio justo y el sustento de cientos de familias en sus territorios de origen.
+    <!-- Footer E-commerce Profesional (Sin Emojis) -->
+    <footer class="bg-[#191615] text-[#C2BBB5] border-t border-stone-800 mt-20 pt-14 pb-8 text-[0.88rem]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-stone-800">
+                
+                <!-- Columna 1: Identidad y Misión -->
+                <div class="space-y-3.5">
+                    <h4 class="text-white font-serif text-lg font-bold">
+                        Artesanías del Valle
+                    </h4>
+                    <p class="text-xs text-stone-400 leading-relaxed max-w-sm">
+                        Preservamos, difundimos y comercializamos piezas maestras elaboradas 100% a mano por comunidades y talleres tradicionales de Colombia. Respaldamos el comercio justo y directo en cada territorio de origen.
                     </p>
-                    <div class="mt-5 flex items-center gap-3 text-stone-400 text-xs">
-                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
-                            <span>🌿</span> 100% Hecho a Mano
-                        </span>
-                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
-                            <span>🤝</span> Comercio Justo
-                        </span>
-                        <span class="inline-flex items-center gap-1 bg-stone-800 px-3 py-1.5 rounded-lg border border-stone-700 text-stone-300 font-medium">
-                            <span>📦</span> Envíos Seguros
-                        </span>
+                    <div class="pt-2 flex flex-wrap gap-2 text-[11px] text-stone-300 font-medium">
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">Hecho a Mano</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">Comercio Justo</span>
+                        <span class="px-2.5 py-1 rounded bg-stone-800 border border-stone-700">Envíos Directos</span>
                     </div>
                 </div>
 
-                <!-- Columna 2: Regiones y Maestría -->
-                <div>
-                    <h4 class="text-xs font-bold tracking-wider text-amber-400 uppercase mb-4">Regiones & Saberes</h4>
+                <!-- Columna 2: Regiones & Saberes -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-serif text-base font-bold">
+                        Regiones & Saberes
+                    </h4>
                     <ul class="space-y-2 text-xs text-stone-400">
-                        <li>🌾 Tuchín, Córdoba — Caña Flecha</li>
-                        <li>🧶 La Guajira — Tejido Wayuu</li>
-                        <li>🏺 Ráquira, Boyacá — Alfarería Negra</li>
-                        <li>🚌 Pitalito, Huila — Chivas en Barro</li>
-                        <li>🌿 Pasto, Nariño — Barniz Mopa-Mopa</li>
-                        <li>🕸️ San Jacinto, Bolívar — Telar Vertical</li>
+                        <li>&bull; Tuchín, Córdoba &mdash; Caña Flecha</li>
+                        <li>&bull; La Guajira &mdash; Tejido Wayuu</li>
+                        <li>&bull; Ráquira, Boyacá &mdash; Alfarería Negra</li>
+                        <li>&bull; Pitalito, Huila &mdash; Chivas en Barro</li>
+                        <li>&bull; San Juan de Pasto, Nariño &mdash; Barniz Mopa-Mopa</li>
+                        <li>&bull; San Jacinto, Bolívar &mdash; Telar Vertical</li>
                     </ul>
                 </div>
 
-                <!-- Columna 3: Atención y Confianza -->
-                <div>
-                    <h4 class="text-xs font-bold tracking-wider text-amber-400 uppercase mb-4">Atención & Compras</h4>
+                <!-- Columna 3: Garantías -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-serif text-base font-bold">
+                        Garantías & Compras
+                    </h4>
                     <ul class="space-y-2 text-xs text-stone-400">
-                        <li>🛡️ Embalaje protector para piezas frágiles</li>
-                        <li>💳 Pagos seguros con PSE, Tarjetas y Bancos</li>
-                        <li>🚚 Cobertura de envíos a toda Colombia</li>
-                        <li>📄 Facturación electrónica y comprobante</li>
-                        <li>💬 Soporte directo a artesanos y clientes</li>
+                        <li>&bull; <a href="{{ route('orders.tracking') }}" class="text-amber-400 hover:underline font-semibold flex items-center gap-1"><span>Consultar estado de pedido con NIT</span> &rarr;</a></li>
+                        <li>&bull; Embalaje protector especial para piezas delicadas</li>
+                        <li>&bull; Envíos directos desde las regiones de origen</li>
+                        <li>&bull; Comercio justo comprobable con artesanos</li>
+                        <li>&bull; Facturación electrónica oficial DIAN</li>
+                        <li>&bull; Medios de pago seguros: PSE, Tarjetas y Bancos</li>
                     </ul>
                 </div>
+
             </div>
 
-            <div class="mt-10 pt-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500">
-                <p>&copy; {{ date('Y') }} Artesanías del Valle. Tienda Oficial de Artesanías de Colombia. Todos los derechos reservados.</p>
-                <p class="mt-2 sm:mt-0 text-stone-400 font-medium">Comercio Justo y Patrimonio Cultural Inmaterial de Colombia</p>
+            <!-- Fila Inferior de Derechos -->
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-3">
+                <p>&copy; {{ date('Y') }} Artesanías del Valle. Tienda Oficial de Artesanías de Colombia.</p>
+                <p class="text-stone-400">Comercio Justo &middot; Patrimonio Cultural Inmaterial</p>
             </div>
         </div>
     </footer>

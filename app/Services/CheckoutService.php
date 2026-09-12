@@ -130,6 +130,7 @@ class CheckoutService
 
             $order = Order::create([
                 'order_number' => $orderNumber,
+                'nit' => Order::generateUniqueNit(),
                 'customer_name' => (string) ($customerData['name'] ?? 'Cliente Anónimo'),
                 'customer_email' => (string) ($customerData['email'] ?? 'artesano@valle.co'),
                 'customer_phone' => (string) ($customerData['phone'] ?? '3001234567'),
@@ -164,6 +165,7 @@ class CheckoutService
             $order = new Order([
                 'id' => mt_rand(100, 999),
                 'order_number' => 'ORD-VALLE-TEST',
+                'nit' => Order::generateUniqueNit(),
                 'customer_name' => (string) ($customerData['name'] ?? 'Cliente Test'),
                 'customer_email' => (string) ($customerData['email'] ?? 'test@artesanias.co'),
                 'subtotal' => $rawSubtotal,
